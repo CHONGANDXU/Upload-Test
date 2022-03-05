@@ -1,0 +1,584 @@
+
+一、我的(用户管理)模块：
+	1）动态数量：
+		请求方式：GET
+		请求地址：/user/dynamic
+
+		请求参数：
+			userId		用户id
+
+		返回参数：
+			data: num	num表示发布动态的数量
+		
+		返回示例：
+			data:{
+				num: 3
+			}
+
+	2）动态内容：
+		请求方式：GET
+		请求地址：/user/dynamicInfo
+
+		请求参数：
+			userId		用户id
+
+		返回参数：
+			data		用户发布所有动态
+		
+		返回示例：
+			data：{
+				dynamicArr:[
+					{
+						userNickname："张三"，
+						userPic："用户头像路径",
+						title："标题",
+						content："内容"
+						collectCount：20，	//收藏量
+						forwardingCount：20，	//转发量
+						likeCount：20，		//点赞量
+						commentsCount：20	//评论数量
+					},
+					{
+						userNickname："张三"，
+						userPic："用户头像路径",
+						title："标题",
+						content："内容"
+						collectCount：20，	//收藏量
+						forwardingCount：20，	//转发量
+						likeCount：20，		//点赞量
+						commentsCount：20	//评论数量
+					}，
+					.
+					.
+					.
+				]
+			}
+
+	3）币值：
+		请求方式：GET
+		请求地址：/user/coin
+
+		请求参数：
+			userId		用户id
+
+		返回参数：
+			data: num	num表示发布动态的数量
+		
+		返回示例：
+			data:{
+				num: 3
+			}
+	
+
+	4）关注量：
+		请求方式：GET
+		请求地址：/user/attention
+
+		请求参数：
+			userId		用户id
+
+		返回参数：
+			data: num	num表示关注用户的数量
+		
+		返回示例：
+			data:{
+				num: 3
+			}
+
+	5）粉丝量：
+		请求方式：GET
+			请求地址：/user/fans
+
+			请求参数：
+				userId		用户id
+
+			返回参数：
+				data: num	num表示粉丝的数量
+			
+			返回示例：
+				data:{
+					num: 3
+				}
+
+	6）收藏量：
+		请求方式：GET
+		请求地址：/user/collect
+
+		请求参数：
+			userId		用户id
+
+		返回参数：
+			data: num	num表示收藏的数量
+		
+		返回示例：
+			data:{
+				num: 3
+			}
+
+	7）收藏内容：
+		请求方式：GET
+		请求地址：/user/collectConten
+
+		请求参数：
+			userId		用户id
+
+		返回参数：
+			success		判断用户是否收藏内容
+			msg		结果提示（如：你还没有添加过 收藏哦）
+			data		返回数据
+
+		返回示例：
+			success：true，
+			msg：""，
+			data：{
+				collectArr：[
+					{
+						userNickname："张三"，
+						userPic："用户头像路径",
+						title："标题",
+						content："内容"
+						collectCount：20，	//收藏量
+						forwardingCount：20，	//转发量
+						likeCount：20，		//点赞量
+						commentsCount：20	//评论数量
+					},
+					{
+						userNickname："李四"，
+						userPic："用户头像路径",
+						title："标题",
+						content："内容"
+						collectCount：20，	//收藏量
+						forwardingCount：20，	//转发量
+						likeCount：20，		//点赞量
+						commentsCount：20	//评论数量
+					}，
+					.
+					.
+					.
+				]
+			}
+
+
+	8）编辑资料：
+		请求方式：POST
+		请求地址：/user/modifyUserInfo
+
+		请求参数：
+			userId		用户id
+			newNickname	修改之后的用户昵称
+			newGender	修改之后的用户性别
+			newBirthday	修改之后的用户生日
+			newPhone	修改之后用户电话号码
+
+		返回参数：
+			success		修改信息是否成功（true表示成功，false表示失败）
+			msg		提示信息，是否成功，失败的原因
+
+		返回示例：
+			success：false
+			msg："用户名已存在"
+
+	9）密码登录：
+		请求方式：POST
+		请求地址：/user/login
+
+		请求参数：
+			userName	用户名（用户名可以是用户昵称，以及电话号码）
+			password	密码
+
+		返回参数：
+			success		是否登录成功（true表示成功，false表示失败）
+			msg		操作提示信息
+			data		返回用户基本信息
+
+		返回示例：
+			success：false，
+			msg："该用户未注册，请注册后登录"
+			data：{
+				userId：1111，
+				userNickname："张三"，
+				userEmail："111@qq.com",
+				userPhone："12345678910",
+				userPic："用户头像"
+			}
+
+
+	10）验证码登录：
+		请求方式：POST
+		请求地址：/user/codeLogin
+
+		请求参数：
+			userPhone	手机号
+			checkCode	验证码
+
+		返回参数：
+			success		是否登录成功（true表示成功，false表示失败）
+			msg		操作提示信息
+
+		返回示例：
+			success：false，
+			msg："该用户未注册，请注册后登录"
+
+	11）注册：
+		请求方式：POST
+		请求地址：/user/enroll
+
+		请求参数：
+			userPhone	用户手机号码（不可重复）
+			userName	用户名（不可重复）
+			password	密码
+			userEmail	用户邮箱（不可重复）
+			checkCode	验证码
+
+		返回参数：
+			success		是否注册成功（true表示成功，false表示失败）
+			msg		操作提示信息
+
+		返回示例：
+			success：false，
+			msg："该号码已被注册"
+
+	12）退出登录
+		请求方式：GET
+		请求地址：/user/exit
+
+		请求参数：无
+
+		返回参数：
+			success		是否退出成功（true表示成功，false表示失败）
+
+	13）修改密码：
+		请求方式：POST
+		请求地址：/user/modifyPassword
+		
+		请求参数：
+			①忘记密码：userPhone		手机号
+				   newPassword		新密码
+				   checkCode		验证码
+
+			②登录后通过原密码修改密码：
+				   userPhone		手机号
+				   password		原密码
+				   newPassword		新密码
+
+		返回参数：
+			success		修改结果
+			msg		修改密码提示信息
+
+		返回示例：
+			success：true，
+			msg："密码修改成功，请返回登录"
+
+二、质疑模块：
+	1）搜索（搜索历史）：
+		请求方式：GET
+		请求地址：/query/search
+
+		请求参数：
+			text		搜索内容
+
+		返回参数：
+			success		是否搜索到相应内容（true表示有，false表示没有）
+			msg		提示信息（如：没有搜索到相关内容）
+			data		搜索到的相应内容，数组存放
+
+		返回示例：
+			success：true
+			mag：""
+			data：{
+				searchInfo：[
+					{
+						userNickname："张三"，
+						userPic："头像路径"，
+						type: "text",
+						title："标题"，
+						context："内容"，
+						collectCount：20，	//收藏量
+						forwardingCount：20，	//转发量
+						likeCount：20	，	//点赞量
+						commentsCount：20	//评论量
+					},
+					{
+						userNickname："李四"，
+						userPic："头像路径"，
+						type: "video",
+						title："标题"，
+						context："内容"
+						collectCount：20，	//收藏量
+						forwardingCount：20，	//转发量
+						likeCount：20	，	//点赞量
+						commentsCount：20	//评论量
+					},
+					.
+					.
+					.
+				]
+			}
+	
+	2）全网质疑榜：
+		请求方式：GET
+		请求地址：/query/ranking
+
+		请求参数：
+			
+		返回参数：
+			data		榜单信息
+
+		返回示例：
+			data:{
+				rankingArr:[
+					{
+						title："标题",
+						ranking：1,	//排名
+					}，
+					{
+						title："标题",
+						ranking：3,	//排名
+					}，
+					{
+						title："标题",
+						ranking：2,	//排名
+					}
+				]
+			}
+
+
+
+三、首页模块：
+	1）导航条：
+		请求方式：GET
+		请求地址：/content/indexes
+
+		请求参数：
+			对应的索引
+
+		返回参数：
+			data		通过索引查找的所有数据
+
+		返回示例：
+			data：{
+				contentArr：[
+					{
+						userNickname："张三"，
+						userPic："用户头像路径",
+						title："标题",
+						content："内容"
+						collectCount：20，	//收藏量
+						forwardingCount：20，	//转发量
+						likeCount：20，		//点赞量
+						commentsCount：20	//评论数量
+					}，
+					{
+						userNickname："李四"，
+						userPic："用户头像路径",
+						title："标题",
+						content："内容"
+						collectCount：20，	//收藏量
+						forwardingCount：20，	//转发量
+						likeCount：20，		//点赞量
+						commentsCount：20	//评论数量
+					}，
+					.
+					.
+					.
+				]		
+			}
+
+	2）筛选：
+		请求方式：GET
+		请求地址：/content/screening
+
+		请求参数：
+			type		筛选类型（all表示综合，video表示视频，imageText表示图文）
+
+		返回参数：
+			data		通过筛选查找的所有数据
+		
+		返回示例
+			data：{
+				contentArr：[
+					{
+						userNickname："张三"，
+						userPic："用户头像路径",
+						title："标题",
+						content："内容"
+						collectCount：20，	//收藏量
+						forwardingCount：20，	//转发量
+						likeCount：20，		//点赞量
+						commentsCount：20	//评论数量
+					}，
+					{
+						userNickname："李四"，
+						userPic："用户头像路径",
+						title："标题",
+						content："内容"
+						collectCount：20，	//收藏量
+						forwardingCount：20，	//转发量
+						likeCount：20，		//点赞量
+						commentsCount：20	//评论数量
+					}，
+					.
+					.
+					.
+				]
+			}
+
+四、显示内容模块
+	1）发布内容：
+		请求方式：POST
+		请求地址：/content/release
+
+		请求参数：
+			userId		用户id
+			type		发布内容的类型
+			indexes		发布内容的分类
+			title		标题
+			content		内容
+
+		返回参数：
+			success		是否发布成功（true成功，false失败）
+			msg		提示信息
+			data		返回内容唯一标识
+
+
+		返回示例：
+			success：true，
+			msg："发布成功"，
+			data：{
+				contentId：1234		//内容的唯一标识
+			}
+
+	
+	2）转发：
+		请求方式：GET
+		请求地址：/content/forwarding
+
+		请求参数：
+			contentId	对应转发内容的id
+
+		返回参数：
+			success		是否转发成功（true成功，false失败）
+			msg		提示信息
+			data		返回相应数据
+		
+		返回示例：
+			success：true，
+			msg："转发成功"，
+			data：{
+				forwardingCount：20
+			}
+
+	3）收藏：
+		请求方式：GET
+		请求地址：/content/collect
+
+		请求参数：
+			userId		收藏者id
+			contentId	收藏内容的id
+
+		返回参数：
+			success		是否收藏成功（true成功，false失败）
+			msg		提示信息
+			data		返回相应数据
+
+		返回示例：
+			success：true，
+			msg："成功"，
+			data：{
+				num：20，			//收藏者主页的收藏量+1之后的结果
+				userNickname："张三"，
+				userPic："用户头像路径",
+				title："标题",
+				content："内容"
+				collectCount：20，		//收藏量（对应内容被收藏之后的收藏量+1的结果）
+				forwardingCount：20，		//转发量
+				likeCount：20，			//点赞量
+				commentsCount：20		//评论数量
+			}
+	
+	4）点赞：
+		请求方式：GET
+		请求地址：/content/like
+
+		请求参数：
+			contentId		被点赞的内容id
+			whether			boolean类型，判断是点赞还是取消点赞（true点赞，false取消点赞）
+
+		返回参数：
+			success			是否点赞/取消点赞成功（true成功，false失败）
+			
+		返回示例：
+			success：true
+
+	5）评论：
+		请求方式：POST
+		请求地址：/content/comments
+
+		请求参数：
+			contentId		被评论的内容id
+			userId			评论者id
+			commentsInfo		发表的评论内容
+
+		返回参数：
+			success			是否评论成功
+			data			评论之后的数据
+
+		返回示例：
+			success：true
+			data：{
+				commentsCount：20	//成功发表评论之后的数量+1的结果
+				commentsInfoArr：[
+					{
+						userPic："用户头像"，
+						userNickname："张三"，
+						commentsIn："发布内容者真帅"
+					},
+					{
+						userPic："用户头像"，
+						userNickname："李四"，
+						commentsIn："天降正义"
+					}，
+					.
+					.
+					.
+				]
+			}
+
+	6）刷新
+		请求方式：GET
+		请求地址：/content/refresh
+
+		请求参数：无
+		返回参数：
+			success		是否刷新成功
+			data		刷新之后的内容
+		
+		返回示例：
+			success：true，
+			data：{
+				contentArr：[
+					{
+						userNickname："张三"，
+						userPic："用户头像路径",
+						title："标题",
+						content："内容"
+						collectCount：20，	//收藏量
+						forwardingCount：20，	//转发量
+						likeCount：20，		//点赞量
+						commentsCount：20	//评论数量
+					}，
+					{
+						userNickname："李四"，
+						userPic："用户头像路径",
+						title："标题",
+						content："内容"
+						collectCount：20，	//收藏量
+						forwardingCount：20，	//转发量
+						likeCount：20，		//点赞量
+						commentsCount：20	//评论数量
+					}，
+					.
+					.
+					.
+				]
+			}
