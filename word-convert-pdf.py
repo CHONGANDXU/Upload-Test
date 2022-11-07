@@ -16,7 +16,7 @@ def doc2pdf(input_file):
 
 if __name__ == "__main__":
     doc_files = []
-    directory = "C:\\Users\\CqC33\\Downloads\\19"
+    directory = "C:"
     for root, dirs, filenames in walk(directory):
         for file in filenames:
             if file.endswith(".doc") or file.endswith(".docx"):
