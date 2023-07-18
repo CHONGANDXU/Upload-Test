@@ -1,28 +1,11 @@
-from win32com.client import Dispatch
-from os import walk
+from docx2pdf import convert
 import os
 import time
 
-wdFormatPDF = 17
+word_path = r'/Users/chengchong/Desktop/OneDrive\ -\ yc3sq/docx'
 
-def doc2pdf(input_file):
-    word = Dispatch('Word.Application')
-    doc = word.Documents.Open(input_file)
-    print(input_file)
-    doc.SaveAs(input_file.replace(".docx", ".pdf"), FileFormat=wdFormatPDF)
-    doc.Close()
-    word.Quit()
+word_to_pdf = r'/Users/chengchong/Desktop/OneDrive\ -\ yc3sq/docx'
 
-
-if __name__ == "__main__":
-    doc_files = []
-    directory = "C:"
-    for root, dirs, filenames in walk(directory):
-        for file in filenames:
-            if file.endswith(".doc") or file.endswith(".docx"):
-                print(os.path.abspath(root + "\\" + file))
-                print(os.path.abspath(root + "\\" + file).replace(".docx",".pdf"))
-                doc2pdf(os.path.abspath(root + "\\" + file))
-            else:
-                continue
-            time.sleep(3)
+for i,j,name in os.walk(word_path):
+    for word_name in name:
+         convert(word_path+"/"+word_name, word_to_pdf+"/"+word_name.replace("docx","pdf"))
