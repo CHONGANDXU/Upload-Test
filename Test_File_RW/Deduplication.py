@@ -59,11 +59,19 @@ combine = itertools.product(http_urls, https_urls)
 #     print(subset[0])
 #     print(subset[1])
 
-# # 重新打开文件，指定写入模式
-# file = open(file_path+"/non-duplicate.txt", "w")
-# # 遍历字典中的键
-# for url in urls:
-#     # 将键加上换行符写入文件
-#     file.write(url + "\n")
-# # 关闭文件
-# file.close()
+# 重新打开文件，指定写入模式
+file = open(file_path+"/non-duplicate.txt", "w")
+# 遍历字典中的键
+for url in http_urls:
+    # 将键加上换行符写入文件
+    file.write(url + "\n")
+
+for url in https_urls:
+    # 将键加上换行符写入文件
+    file.write(url + "\n")
+
+for url in other_urls:
+    # 将键加上换行符写入文件
+    file.write(url + "\n") 
+# 关闭文件
+file.close()
