@@ -17,7 +17,7 @@ import itertools
 import urllib.parse
 
 # 打开文件
-row = open(file_path + "/tracker_best.txt", "r")
+row = open(file_path + "tracker_best.txt", "r")
 # 获取所有行的列表
 lines = row.readlines()
 # 关闭文件
