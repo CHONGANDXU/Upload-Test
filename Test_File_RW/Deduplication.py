@@ -8,16 +8,17 @@ import os
 
 # 获取当前工作目录
 cwd = os.getcwd()
+print("工作目录为",cwd)
 # 拼接文件路径
 file_path = os.path.join(cwd, "Test_File_RW")
+print("文件路径为",file_path)
 
 # 导入re模块
 import re
-import itertools
 import urllib.parse
 
 # 打开文件
-row = open(file_path + "tracker_best.txt", "r")
+row = open(file_path + "/tracker_best.txt", "r")
 # 获取所有行的列表
 lines = row.readlines()
 # 关闭文件
@@ -38,6 +39,7 @@ other_urls = set()
 # 遍历set集合中的每个URL
 for url in all_urls:
     parsed_url = urllib.parse.urlparse(url)
+    print(parsed_url)
     # 如果URL协议为https，且有端口号443，则去除端口号，并添加到https_urls中
     if parsed_url.scheme == "https" and parsed_url.port == 443:
         new_url = re.sub(":443", "", url)
@@ -63,8 +65,7 @@ print()
 print("The set of other URLs is:", other_urls)
 print()
 
-combine = itertools.product(http_urls, https_urls)
-
+# 导入itertools模块
 import itertools
 
 # 生成http和https集合的所有可能组合
